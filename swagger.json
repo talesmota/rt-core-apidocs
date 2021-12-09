@@ -5,7 +5,7 @@
       "description": "Rt Core REST APIs",
       "version": "1.9.0"
     },
-    "basePath": "/magma/v1",
+    "basePath": "/rt-core/v1",
     "consumes": [
       "application/json"
     ],
