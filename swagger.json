@@ -1,9 +1,9 @@
 {
     "swagger": "2.0",
     "info": {
-      "title": "Magma",
-      "description": "Magma REST APIs",
-      "version": "1.0.0"
+      "title": "RT Core",
+      "description": "Rt Core REST APIs",
+      "version": "1.9.0"
     },
     "basePath": "/magma/v1",
     "consumes": [
