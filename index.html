@@ -1,0 +1,139 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" />
+    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+    <style>
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+      }
+
+      body
+      {
+        margin:0;
+        background: #fafafa;
+      }
+      .grid{
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        grid-template-areas: 'side main';
+      }
+      .sidenav{
+        background-color: rgb(27 27 27);
+        grid-area: side;
+      }
+      .swagger-ui{
+        width:100%;
+      }
+      .sidenav a{
+        display: block;
+        color: #FFF;
+        width: 100%;
+      }
+      .box{
+        grid-area: main;
+        display: flex;
+        width: 100%;
+      }
+      .radLog{
+        margin: 15px auto;
+        background-color: #FFF;
+        border-radius: 37px;
+        width: 70px;
+        height: 70px;
+      }
+      .logo{
+        width: 70px;
+        height: 70px;
+      }
+      .sidenavList{
+        margin: 31px 0;
+        padding: 0;
+      }
+      .sidenavList li{
+        line-height: 25px;
+        padding-left: 14px;
+      }
+      .sidenavList li:hover{
+        background-color: #464646;
+      }
+      .sidenavList li a{
+        font-family: 'sans-serif';
+        word-break: break-all;
+        word-break: break-word;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="grid">
+      <div class="sidenav">
+          <div class="radLog">
+            <img src="/logo_symbol.png" alt="" class="logo">
+          </div>
+        <div>
+
+          <ul class="sidenavList"></ul>
+        </div>
+
+      </div>
+      <div id="swagger-ui" class="box"></div>
+    </div>
+
+    <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
+    <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+    <script>
+          function relaod() {
+          console.log('reload')
+          setTimeout( () => { window.location.reload() },300);
+        }
+    window.onload = function() {
+      // Begin Swagger UI call region
+      const ui = SwaggerUIBundle({
+        url: "/swagger.json",
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout"
+      });
+      // End Swagger UI call region
+
+      window.ui = ui;
+      window.setTimeout( () =>{
+      
+        
+        var h3s = Array.from( document.querySelectorAll('h3.opblock-tag') ); 
+        for ( let i of h3s ) {
+          var label = i.getAttribute('data-tag');
+          var link = i.querySelector('a').href;
+          console.log( `label: ${label}\t${link}`);
+          document.querySelector(".sidenavList").innerHTML += `<li><a href="${link}" onclick="relaod()">${label}</a></li>`
+        }
+        
+      }, 900);
+      
+    };
+  </script>
+  </body>
+</html>
